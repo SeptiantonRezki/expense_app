@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 import '../enum/category_type.dart';
 
 class MoneyModel {
@@ -40,4 +42,11 @@ class MoneyModel {
       "dateTime": dateTime,
     };
   }
+}
+
+String getMoneyFormatted(double money) {
+  return NumberFormat.compactCurrency(
+    decimalDigits: 2,
+    symbol: "",
+  ).format(money);
 }

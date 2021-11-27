@@ -10,6 +10,7 @@ part 'expense_state.dart';
 class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
   ExpenseBloc() : super(ExpenseLoadingState()) {
     on<ExpenseStartedEvent>(_onExpenseStartedEvent);
+    on<ExpenseAddNewEvent>(_onExpenseAddNewEvent);
   }
 
   _onExpenseStartedEvent(
@@ -26,6 +27,28 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
       emit(
         ExpenseErrorState(error: error),
       );
+    }
+  }
+
+  _onExpenseAddNewEvent(
+      ExpenseAddNewEvent event, Emitter<ExpenseState> emit) async {
+    final state = this.state;
+
+    if (state is ExpenseLoadedState) {
+      try {
+        emit(
+          state.copyWith(
+            newExpenseList: [
+              ...state.expenseList,
+              event.money.toMap(),
+            ],
+          ),
+        );
+      } catch (error) {
+        emit(
+          ExpenseErrorState(error: error),
+        );
+      }
     }
   }
 }

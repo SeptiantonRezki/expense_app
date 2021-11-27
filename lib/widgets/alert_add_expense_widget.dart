@@ -1,6 +1,11 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:spending_app/bloc/expense/expense_bloc.dart';
+import 'package:spending_app/enum/category_type.dart';
+import 'package:uuid/uuid.dart';
 import 'package:flutter/material.dart';
 
 import '../data/data.dart';
+import '../models/money_model.dart';
 
 class AlertAddExpenseWidget extends StatelessWidget {
   const AlertAddExpenseWidget({Key? key}) : super(key: key);
@@ -11,6 +16,8 @@ class AlertAddExpenseWidget extends StatelessWidget {
     String _selectedCategory = categoryTypeList[0];
     final TextEditingController _expenseTotal = TextEditingController();
     DateTime _selectedDate = DateTime.now();
+
+    const _uuid = Uuid();
 
     return AlertDialog(
       title: const Text("Tambah Pengeluaran"),
@@ -91,10 +98,16 @@ class AlertAddExpenseWidget extends StatelessWidget {
         ),
         TextButton(
           onPressed: () {
-            print(_expenseName.text);
-            print(_expenseTotal.text);
-            print(_selectedCategory);
-            print(_selectedDate);
+            MoneyModel money = MoneyModel(
+              id: _uuid.v4(),
+              label: _expenseName.text,
+              money: double.parse(_expenseTotal.text),
+              categoryType: getCategoryType(_selectedCategory),
+              dateTime: _selectedDate.toString().substring(0, 10),
+            );
+
+            BlocProvider.of<ExpenseBloc>(context)
+                .add(ExpenseAddNewEvent(money: money));
 
             Navigator.pop(context, "OK");
           },
