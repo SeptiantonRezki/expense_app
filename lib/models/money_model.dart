@@ -1,24 +1,18 @@
 import '../enum/category_type.dart';
 
-const Map _dateTimeMoney = {
-  "day": "",
-  "month": "",
-  "year": "",
-};
-
 class MoneyModel {
   final String id;
   final String label;
   final double money;
   final CategoryType categoryType;
-  final Map dateTime;
+  final String dateTime;
 
   MoneyModel({
     required this.id,
     required this.label,
     required this.money,
     required this.categoryType,
-    this.dateTime = _dateTimeMoney,
+    required this.dateTime,
   });
 
   MoneyModel copyWith({
@@ -26,7 +20,7 @@ class MoneyModel {
     String? newLabel,
     double? newMoney,
     CategoryType? newCategoryType,
-    Map? newDateTime,
+    String? newDateTime,
   }) {
     return MoneyModel(
       id: newId ?? id,
@@ -35,5 +29,15 @@ class MoneyModel {
       categoryType: newCategoryType ?? categoryType,
       dateTime: newDateTime ?? dateTime,
     );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      "id": id,
+      "label": label,
+      "money": money,
+      "categoryType": categoryType,
+      "dateTime": dateTime,
+    };
   }
 }

@@ -12,6 +12,9 @@ dependencies:
   flutter:
     sdk: flutter
 
+  equatable: ^2.0.3
+  grouped_list: ^4.1.0
+  flutter_bloc: ^8.0.0
   cupertino_icons: ^1.0.2
 
 dev_dependencies:
