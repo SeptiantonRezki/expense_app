@@ -56,7 +56,19 @@ class DrawerNavigationWidget extends StatelessWidget {
               ],
             ),
             onTap: () {
-              print("Pilih Bulan");
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: const Text("Pilih Bulan"),
+                      content: StatefulBuilder(builder: (context, setState) {
+                        return SingleChildScrollView(
+                            child: Column(
+                          children: [],
+                        ));
+                      }),
+                    );
+                  });
             },
           ),
           ListTile(

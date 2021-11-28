@@ -53,7 +53,7 @@ class HomeScreen extends StatelessWidget {
               ),
               itemBuilder: (c, item) {
                 return Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 30.0),
+                  margin: const EdgeInsets.symmetric(horizontal: 10.0),
                   child: ListTile(
                     leading: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
