@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:spending_app/bloc/expense/expense_bloc.dart';
 
-import '../data/data.dart';
 import '../models/money_model.dart';
+import '../bloc/expense/expense_bloc.dart';
 
 class AlertSelectMonthWidget extends StatelessWidget {
   const AlertSelectMonthWidget({Key? key}) : super(key: key);
@@ -12,15 +11,19 @@ class AlertSelectMonthWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ExpenseBloc, ExpenseState>(builder: (context, state) {
       if (state is ExpenseLoadingState) {
-        return const Center(
-          child: CircularProgressIndicator(),
+        return const SingleChildScrollView(
+          child: Center(
+            child: CircularProgressIndicator(),
+          ),
         );
       }
 
       if (state is ExpenseLoadedState) {
         if (state.expenseMapList.keys.isEmpty) {
-          return const Center(
-            child: Text("Pengeluaran masih kosong."),
+          return const SingleChildScrollView(
+            child: Center(
+              child: Text("Pengeluaran masih kosong."),
+            ),
           );
         } else {
           return SingleChildScrollView(
@@ -28,7 +31,13 @@ class AlertSelectMonthWidget extends StatelessWidget {
               children: state.expenseMapList.keys.map((item) {
                 return ListTile(
                   title: Text(getDateTimeString(item)),
-                  onTap: () {},
+                  onTap: () {
+                    context.read<ExpenseBloc>().add(
+                          ExpenseChangeSelectedDateEvent(selectedDate: item),
+                        );
+
+                    Navigator.pop(context);
+                  },
                 );
               }).toList(),
             ),
@@ -36,8 +45,10 @@ class AlertSelectMonthWidget extends StatelessWidget {
         }
       }
 
-      return const Center(
-        child: Text("Something went wrong!"),
+      return const SingleChildScrollView(
+        child: Center(
+          child: Text("Something went wrong!"),
+        ),
       );
     });
   }

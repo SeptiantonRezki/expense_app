@@ -27,6 +27,7 @@ class AlertAddExpenseWidget extends StatelessWidget {
             children: [
               TextField(
                 controller: _expenseName,
+                textCapitalization: TextCapitalization.sentences,
                 decoration: const InputDecoration(
                   labelText: "Nama Pengeluaran",
                 ),

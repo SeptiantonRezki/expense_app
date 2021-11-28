@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:spending_app/widgets/alert_select_month_widget.dart';
+
+import '../widgets/about_us_widget.dart';
+import '../widgets/alert_select_month_widget.dart';
 
 class DrawerNavigationWidget extends StatelessWidget {
   const DrawerNavigationWidget({Key? key}) : super(key: key);
@@ -61,7 +63,10 @@ class DrawerNavigationWidget extends StatelessWidget {
                   context: context,
                   builder: (BuildContext context) {
                     return const AlertDialog(
-                      title: Text("Pilih Bulan"),
+                      title: Text(
+                        "Pilih Bulan",
+                        textAlign: TextAlign.center,
+                      ),
                       content: AlertSelectMonthWidget(),
                     );
                   });
@@ -82,7 +87,17 @@ class DrawerNavigationWidget extends StatelessWidget {
               ],
             ),
             onTap: () {
-              print("Tentang Kami");
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return const AlertDialog(
+                      title: Text(
+                        "Tentang Kami",
+                        textAlign: TextAlign.center,
+                      ),
+                      content: AboutUsWidget(),
+                    );
+                  });
             },
           )
         ],

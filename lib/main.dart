@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../screens/home_screen.dart';
+import '../config/app_router.dart';
+import '../config/custom_app_route.dart';
 import '../bloc/expense/expense_bloc.dart';
 import '../bloc/simple_bloc_observer.dart';
 
@@ -29,7 +30,8 @@ class MyApp extends StatelessWidget {
         child: const MaterialApp(
           debugShowCheckedModeBanner: false,
           title: "Spending App",
-          home: HomeScreen(),
+          onGenerateRoute: AppRouter.onGenerateRoute,
+          initialRoute: CustomAppRoute.homeScreen,
         ));
   }
 }

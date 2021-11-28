@@ -49,9 +49,17 @@ class ExpenseWidget extends StatelessWidget {
             ),
             title: Text(
               item["label"],
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
             ),
             subtitle: Text(item["dateTime"]),
-            trailing: Text("Rp ${getMoneyFormatted(item['money'])}"),
+            trailing: Text(
+              "Rp ${getMoneyFormatted(item['money'])}",
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
         );
       },
