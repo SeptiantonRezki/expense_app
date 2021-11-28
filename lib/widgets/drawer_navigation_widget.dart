@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spending_app/widgets/alert_select_month_widget.dart';
 
 class DrawerNavigationWidget extends StatelessWidget {
   const DrawerNavigationWidget({Key? key}) : super(key: key);
@@ -59,14 +60,9 @@ class DrawerNavigationWidget extends StatelessWidget {
               showDialog(
                   context: context,
                   builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: const Text("Pilih Bulan"),
-                      content: StatefulBuilder(builder: (context, setState) {
-                        return SingleChildScrollView(
-                            child: Column(
-                          children: [],
-                        ));
-                      }),
+                    return const AlertDialog(
+                      title: Text("Pilih Bulan"),
+                      content: AlertSelectMonthWidget(),
                     );
                   });
             },

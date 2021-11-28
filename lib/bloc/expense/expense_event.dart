@@ -18,6 +18,15 @@ class ExpenseAddNewEvent extends ExpenseEvent {
   List<Object> get props => [money];
 }
 
+class ExpenseChangeSelectedDateEvent extends ExpenseEvent {
+  final String selectedDate;
+
+  const ExpenseChangeSelectedDateEvent({required this.selectedDate});
+
+  @override
+  List<Object> get props => [selectedDate];
+}
+
 class ExpenseErrorEvent extends ExpenseEvent {
   final Object error;
 

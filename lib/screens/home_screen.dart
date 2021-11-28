@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grouped_list/grouped_list.dart';
-import 'package:spending_app/bloc/expense/expense_bloc.dart';
-import 'package:spending_app/enum/category_type.dart';
-import 'package:spending_app/models/money_model.dart';
-import 'package:spending_app/widgets/alert_add_expense_widget.dart';
+
+import '../enum/category_type.dart';
+import '../models/money_model.dart';
+import '../bloc/expense/expense_bloc.dart';
+import '../widgets/alert_add_expense_widget.dart';
 
 import '../widgets/drawer_navigation_widget.dart';
 
@@ -27,13 +28,13 @@ class HomeScreen extends StatelessWidget {
         }
 
         if (state is ExpenseLoadedState) {
-          if (state.expenseList.isEmpty) {
+          if (state.expenseList.isEmpty && state.selectedExpenseDate.isEmpty) {
             return const Center(
               child: Text("Pengeluaran masih kosong."),
             );
           } else {
             return GroupedListView<dynamic, String>(
-              elements: state.expenseList,
+              elements: state.expenseMapList[state.selectedExpenseDate]!,
               groupBy: (item) => item["dateTime"],
               groupComparator: (value1, value2) => value2.compareTo(value1),
               itemComparator: (item1, item2) =>

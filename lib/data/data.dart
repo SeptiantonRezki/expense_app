@@ -52,7 +52,25 @@ final expenseList = [
   ).toMap(),
 ];
 
+final selectedExpenseDate = "11-2021";
+
 final expenseMapList = {
+  "11-2021": [
+    MoneyModel(
+      id: "id-01",
+      label: "Internet",
+      money: 100000,
+      categoryType: CategoryType.primer,
+      dateTime: "10-11-2021",
+    ).toMap(),
+    MoneyModel(
+      id: "id-02",
+      label: "Pajak",
+      money: 200000,
+      categoryType: CategoryType.primer,
+      dateTime: "12-11-2021",
+    ).toMap(),
+  ],
   "05-2021": [
     MoneyModel(
       id: "id-03",
@@ -76,22 +94,6 @@ final expenseMapList = {
       money: 200000,
       categoryType: CategoryType.primer,
       dateTime: "10-06-2021",
-    ).toMap(),
-  ],
-  "11-2021": [
-    MoneyModel(
-      id: "id-01",
-      label: "Internet",
-      money: 100000,
-      categoryType: CategoryType.primer,
-      dateTime: "10-11-2021",
-    ).toMap(),
-    MoneyModel(
-      id: "id-02",
-      label: "Pajak",
-      money: 200000,
-      categoryType: CategoryType.primer,
-      dateTime: "12-11-2021",
     ).toMap(),
   ],
 };

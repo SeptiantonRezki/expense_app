@@ -75,7 +75,12 @@ String getMonthString(int month) {
   }
 }
 
-String getDateTimeString(int month, int year) {
+String getDateTimeString(String date) {
+  final dateArray = date.split("-");
+
+  final month = int.parse(dateArray[0]);
+  final year = int.parse(dateArray[1]);
+
   return "${getMonthString(month)} $year";
 }
 
