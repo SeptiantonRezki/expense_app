@@ -5,6 +5,7 @@ class CustomAppRoute {
 
   static const String homeScreen = "/";
   static const String errorScreen = "/error";
+  static const String summaryScreen = "/summary";
 
   // * Go to route:
 

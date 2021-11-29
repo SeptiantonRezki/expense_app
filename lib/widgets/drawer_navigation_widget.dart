@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spending_app/config/custom_app_route.dart';
 
 import '../widgets/about_us_widget.dart';
 import '../widgets/alert_select_month_widget.dart';
@@ -97,6 +98,25 @@ class DrawerNavigationWidget extends StatelessWidget {
                       ],
                     );
                   });
+            },
+          ),
+          ListTile(
+            title: Row(
+              children: const [
+                Icon(
+                  Icons.analytics,
+                  color: Colors.black,
+                ),
+                SizedBox(
+                  width: 10.0,
+                ),
+                Text(
+                  "Ringkasan Pengeluaran",
+                )
+              ],
+            ),
+            onTap: () {
+              Navigator.pushNamed(context, CustomAppRoute.summaryScreen);
             },
           ),
           ListTile(
