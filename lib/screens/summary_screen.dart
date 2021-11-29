@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:spending_app/bloc/expense/expense_bloc.dart';
-import 'package:spending_app/data/data.dart';
-import 'package:spending_app/enum/category_type.dart';
-import 'package:spending_app/models/money_model.dart';
+
+import '../data/data.dart';
+import '../enum/category_type.dart';
+import '../models/money_model.dart';
+import '../bloc/expense/expense_bloc.dart';
 
 class SummaryScreen extends StatelessWidget {
   const SummaryScreen({Key? key}) : super(key: key);
@@ -29,6 +30,11 @@ class SummaryScreen extends StatelessWidget {
               child: Text("Pengeluaran masih kosong."),
             );
           } else {
+            // Membuat map untuk menampung semua kategori,
+            // kemudian set value awal menjadi 0.0;
+            // Tambahkan semua money sesuai kategori.
+            // Terakhir dapatkan total.
+
             final Map<String, double> currentExpenseTotal = {};
             final Map<String, double> totalExpense = {"Total": 0.0};
 
