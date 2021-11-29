@@ -9,6 +9,8 @@ abstract class ExpenseEvent extends Equatable {
 
 class ExpenseStartedEvent extends ExpenseEvent {}
 
+// Menambah pengeluaran
+
 class ExpenseAddNewEvent extends ExpenseEvent {
   final MoneyModel money;
 
@@ -17,6 +19,19 @@ class ExpenseAddNewEvent extends ExpenseEvent {
   @override
   List<Object> get props => [money];
 }
+
+// Menghapus expense
+
+class ExpenseDeleteExpenseEvent extends ExpenseEvent {
+  final MoneyModel money;
+
+  const ExpenseDeleteExpenseEvent({required this.money});
+
+  @override
+  List<Object> get props => [money];
+}
+
+// Ganti selected date
 
 class ExpenseChangeSelectedDateEvent extends ExpenseEvent {
   final String selectedDate;

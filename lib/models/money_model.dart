@@ -3,11 +3,11 @@ import 'package:intl/intl.dart';
 import '../enum/category_type.dart';
 
 class MoneyModel {
-  final String id;
-  final String label;
-  final double money;
-  final CategoryType categoryType;
-  final String dateTime;
+  String id;
+  String label;
+  double money;
+  CategoryType categoryType;
+  String dateTime;
 
   MoneyModel({
     required this.id,
@@ -41,6 +41,16 @@ class MoneyModel {
       "categoryType": categoryType,
       "dateTime": dateTime,
     };
+  }
+
+  factory MoneyModel.fromJson(Map json) {
+    return MoneyModel(
+      id: json["id"],
+      label: json["label"],
+      money: json["money"],
+      categoryType: json["categoryType"],
+      dateTime: json["dateTime"],
+    );
   }
 }
 

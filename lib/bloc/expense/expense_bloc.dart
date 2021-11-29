@@ -11,6 +11,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     on<ExpenseStartedEvent>(_onExpenseStartedEvent);
     on<ExpenseAddNewEvent>(_onExpenseAddNewEvent);
     on<ExpenseChangeSelectedDateEvent>(_onExpenseChangeSelectedDateEvent);
+    on<ExpenseDeleteExpenseEvent>(_onExpenseDeleteExpenseEvent);
   }
 
   // Load semua data.
@@ -68,6 +69,41 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
             state.copyWith(newExpenseMapList: {
               ...state.expenseMapList,
               currentMonth: [event.money.toMap()]
+            }, newSelectedExpenseDate: currentMonth),
+          );
+        }
+      } catch (error) {
+        emit(
+          ExpenseErrorState(error: error),
+        );
+      }
+    }
+  }
+
+  // Menghapus expense berdasarkan id
+
+  _onExpenseDeleteExpenseEvent(
+      ExpenseDeleteExpenseEvent event, Emitter<ExpenseState> emit) async {
+    final state = this.state;
+
+    if (state is ExpenseLoadedState) {
+      try {
+        final dateTimeArray = event.money.dateTime.split("-");
+
+        final year = dateTimeArray[0];
+        final month = dateTimeArray[1];
+
+        final currentMonth = "$month-$year";
+
+        if (state.expenseMapList.containsKey(currentMonth)) {
+          final currentExpense = state.expenseMapList[currentMonth]!
+              .where((item) => item["id"] != event.money.id)
+              .toList();
+
+          emit(
+            state.copyWith(newExpenseMapList: {
+              ...state.expenseMapList,
+              currentMonth: [...currentExpense]
             }, newSelectedExpenseDate: currentMonth),
           );
         }
