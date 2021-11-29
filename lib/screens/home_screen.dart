@@ -25,7 +25,8 @@ class HomeScreen extends StatelessWidget {
         }
 
         if (state is ExpenseLoadedState) {
-          if (state.expenseList.isEmpty && state.selectedExpenseDate.isEmpty) {
+          if (state.expenseMapList.isEmpty &&
+              state.selectedExpenseDate.isEmpty) {
             return const Center(
               child: Text("Pengeluaran masih kosong."),
             );

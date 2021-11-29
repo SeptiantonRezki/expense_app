@@ -11,12 +11,10 @@ class ExpenseLoadingState extends ExpenseState {}
 
 class ExpenseLoadedState extends ExpenseState {
   final Map<String, List<Map>> expenseMapList;
-  final List<Map> expenseList;
   final String selectedExpenseDate;
 
   const ExpenseLoadedState({
     this.expenseMapList = const {},
-    this.expenseList = const [],
     this.selectedExpenseDate = "",
   });
 
@@ -27,13 +25,12 @@ class ExpenseLoadedState extends ExpenseState {
   }) {
     return ExpenseLoadedState(
       expenseMapList: newExpenseMapList ?? expenseMapList,
-      expenseList: newExpenseList ?? expenseList,
       selectedExpenseDate: newSelectedExpenseDate ?? selectedExpenseDate,
     );
   }
 
   @override
-  List<Object> get props => [expenseMapList, expenseList, selectedExpenseDate];
+  List<Object> get props => [expenseMapList, selectedExpenseDate];
 }
 
 class ExpenseErrorState extends ExpenseState {

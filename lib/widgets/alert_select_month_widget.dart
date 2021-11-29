@@ -31,6 +31,12 @@ class AlertSelectMonthWidget extends StatelessWidget {
               children: state.expenseMapList.keys.map((item) {
                 return ListTile(
                   title: Text(getDateTimeString(item)),
+                  trailing: state.selectedExpenseDate == item
+                      ? const CircleAvatar(
+                          backgroundColor: Colors.blue,
+                          radius: 8.0,
+                        )
+                      : const SizedBox(),
                   onTap: () {
                     context.read<ExpenseBloc>().add(
                           ExpenseChangeSelectedDateEvent(selectedDate: item),

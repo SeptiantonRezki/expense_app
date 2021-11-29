@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-// import '../../enum/category_type.dart';
 import '../../models/money_model.dart';
 
 part 'expense_event.dart';
@@ -14,17 +13,13 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     on<ExpenseChangeSelectedDateEvent>(_onExpenseChangeSelectedDateEvent);
   }
 
+  // Load semua data.
+
   _onExpenseStartedEvent(
       ExpenseStartedEvent event, Emitter<ExpenseState> emit) async {
     emit(ExpenseLoadingState());
 
     try {
-      // await Future.delayed(const Duration(seconds: 1)).whenComplete(
-      //   () => emit(
-      //     const ExpenseLoadedState(expenseList: []),
-      //   ),
-      // );
-
       await Future.delayed(const Duration(seconds: 1)).whenComplete(
         () => emit(
           const ExpenseLoadedState(expenseMapList: {}),
@@ -36,6 +31,12 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
       );
     }
   }
+
+  // Menambah pengeluaran ke dalam map.
+  // Contoh: {}
+  // Tambah data: { "11-2021": [ money.toMap() ] }
+  // Jika sudah ada: { "11-2021": [ money.toMap(), money2.toMap() ] }
+  // Gunakan spread (...) untuk mengambil seluruh data.
 
   _onExpenseAddNewEvent(
       ExpenseAddNewEvent event, Emitter<ExpenseState> emit) async {
@@ -70,15 +71,6 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
             }, newSelectedExpenseDate: currentMonth),
           );
         }
-
-        // emit(
-        //   state.copyWith(
-        //     newExpenseList: [
-        //       ...state.expenseList,
-        //       event.money.toMap(),
-        //     ],
-        //   ),
-        // );
       } catch (error) {
         emit(
           ExpenseErrorState(error: error),
@@ -86,6 +78,8 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
       }
     }
   }
+
+  // Mengganti bulan yang yang dipilih untuk ditampilakn.
 
   _onExpenseChangeSelectedDateEvent(
       ExpenseChangeSelectedDateEvent event, Emitter<ExpenseState> emit) async {

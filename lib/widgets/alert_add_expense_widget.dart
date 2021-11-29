@@ -99,18 +99,44 @@ class AlertAddExpenseWidget extends StatelessWidget {
         ),
         TextButton(
           onPressed: () {
-            MoneyModel money = MoneyModel(
-              id: _uuid.v4(),
-              label: _expenseName.text,
-              money: double.parse(_expenseTotal.text),
-              categoryType: getCategoryType(_selectedCategory),
-              dateTime: _selectedDate.toString().substring(0, 10),
-            );
+            // Jika kosong, tampilkan alert.
+            // Jika diisi, buat pengeluaran baru.
 
-            BlocProvider.of<ExpenseBloc>(context)
-                .add(ExpenseAddNewEvent(money: money));
+            if (_expenseName.text.isEmpty ||
+                _expenseTotal.text.isEmpty ||
+                _selectedCategory.isEmpty ||
+                _selectedDate.toString().isEmpty) {
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: const Text(
+                        "Error",
+                        textAlign: TextAlign.center,
+                      ),
+                      content: const Text("Tidak boleh ada yang kosong!"),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.pop(context, 'OK'),
+                          child: const Text('OK'),
+                        ),
+                      ],
+                    );
+                  });
+            } else {
+              MoneyModel money = MoneyModel(
+                id: _uuid.v4(),
+                label: _expenseName.text,
+                money: double.parse(_expenseTotal.text),
+                categoryType: getCategoryType(_selectedCategory),
+                dateTime: _selectedDate.toString().substring(0, 10),
+              );
 
-            Navigator.pop(context, "OK");
+              BlocProvider.of<ExpenseBloc>(context)
+                  .add(ExpenseAddNewEvent(money: money));
+
+              Navigator.of(context).pop();
+            }
           },
           child: const Text("OK"),
         ),

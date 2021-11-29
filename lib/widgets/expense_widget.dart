@@ -26,38 +26,44 @@ class ExpenseWidget extends StatelessWidget {
       groupSeparatorBuilder: (String value) => Padding(
         padding: const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 0.0),
         child: Container(
-            padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 10.0),
-            child: Text(
-              value,
-              style: const TextStyle(fontWeight: FontWeight.bold),
+          padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 10.0),
+          child: Text(
+            value,
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
+          decoration: const BoxDecoration(
+            border: Border(
+              bottom: BorderSide(color: Colors.grey),
             ),
-            decoration: const BoxDecoration(
-                border: Border(bottom: BorderSide(color: Colors.grey)))),
+          ),
+        ),
       ),
       itemBuilder: (c, item) {
         return Container(
-          margin: const EdgeInsets.symmetric(horizontal: 10.0),
-          child: ListTile(
-            leading: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CircleAvatar(
-                  radius: 8.0,
-                  backgroundColor: getCategoryColor(item["categoryType"]),
-                )
-              ],
-            ),
-            title: Text(
-              item["label"],
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
+          margin: const EdgeInsets.symmetric(horizontal: 15.0),
+          child: Card(
+            child: ListTile(
+              leading: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CircleAvatar(
+                    radius: 8.0,
+                    backgroundColor: getCategoryColor(item["categoryType"]),
+                  )
+                ],
               ),
-            ),
-            subtitle: Text(item["dateTime"]),
-            trailing: Text(
-              "Rp ${getMoneyFormatted(item['money'])}",
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
+              title: Text(
+                item["label"],
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              subtitle: Text(item["dateTime"]),
+              trailing: Text(
+                "Rp ${getMoneyFormatted(item['money'])}",
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ),
